@@ -15,3 +15,23 @@
 
 <img src="cloudwatch2.png">
 
+### More info about cloudwatch architecture 
+
+<img src="arch.png">
+
+### SNS with cloudwatch 
+
+<img src="sns.png">
+
+### creating SNS topic and subscribing it 
+
+<img src="sns1.png">
+
+### DBAAS 
+
+<img src="dbaas.png">
+
+### Dbaas 1 for cloud model 
+
+<img src="cloudm.png">
+
