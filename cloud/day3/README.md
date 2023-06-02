@@ -80,3 +80,8 @@ MySQL [(none)]> quit;
 
 ```
 
+### REvision of cloud concept 
+
+<img src="clrv.png">
+
+
