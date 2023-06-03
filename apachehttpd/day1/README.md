@@ -50,4 +50,84 @@ Run "sudo yum update" to apply all updates.
 
 ```
 
+### checking os name 
+
+```
+ec2-user@ip-172-31-13-105 ~]$ uname -r
+5.10.179-166.674.amzn2.x86_64
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ cat  /etc/os-release 
+NAME="Amazon Linux"
+VERSION="2"
+ID="amzn"
+ID_LIKE="centos rhel fedora"
+VERSION_ID="2"
+PRETTY_NAME="Amazon Linux 2"
+ANSI_COLOR="0;33"
+CPE_NAME="cpe:2.3:o:amazon:amazon_linux:2"
+HOME_URL="https://amazonlinux.com/"
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+```
+
+## Installing apache httpd 
+
+### checking rpm package status of httpd 
+```
+[ec2-user@ip-172-31-13-105 ~]$ rpm   -q  httpd
+package httpd is not installed
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+```
+
+### installing httpd with sudo power without root access
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ sudo yum install httpd 
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+--> Running transaction check
+---> Package httpd.x86_64 0:2.4.57-1.amzn2 will be installed
+--> Processing Dependency: httpd-tools = 2.4.57-1.amzn2 for package: httpd-2.4.57-1.amzn2.x86_64
+--> Processing Dependency: httpd-filesystem = 2.4.57-1.amzn2 for package: httpd-2.4.57-1.amzn2.x86_64
+--> Processing Dependency: system-logos-httpd for package: htt
+Package                     Arch           Version                       Repository          Size
+===================================================================================================
+Installing:
+ httpd                       x86_64         2.4.57-1.amzn2                amzn2-core         1.4 M
+Installing for dependencies:
+ apr                         x86_64         1.7.2-1.amzn2                 amzn2-core         130 k
+ apr-util                    x86_64         1.6.3-1.amzn2.0.1             amzn2-core         101 k
+ apr-util-bdb                x86_64         1.6.3-1.amzn2.0.1             amzn2-core          22 k
+ generic-logos-httpd         noarch         18.0.0-4.amzn2                amzn2-core          19 k
+ httpd-filesystem            noarch         2.4.57-1.amzn2                amzn2-core          24 k
+ httpd-tools                 x86_64         2.4.57-1.amzn2                amzn2-core          88 k
+ mailcap                     noarch         2.1.41-2.amzn2                amzn2-core          31 k
+ mod_http2                   x86_64         1.15.19-1.amzn2.0.1           amzn2-core         149 k
+
+Transaction Summary
+===================================================================================================
+Install  1 Package (+8 Dependent packages)
+
+Total download size: 1.9 M
+Installed size: 5.2 M
+Is this ok [y/d/N]: y
+
+```
+
+lets verify it 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ sudo yum install httpd 
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Package httpd-2.4.57-1.amzn2.x86_64 already installed and latest version
+Nothing to do
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ rpm  -q httpd
+httpd-2.4.57-1.amzn2.x86_64
+
+```
 
