@@ -131,3 +131,67 @@ httpd-2.4.57-1.amzn2.x86_64
 
 ```
 
+## Configuration of apache httpd on RHEL / amazon linux 
+
+### checking configuration files 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ rpm -qc    httpd
+/etc/httpd/conf.d/autoindex.conf
+/etc/httpd/conf.d/userdir.conf
+/etc/httpd/conf.d/welcome.conf
+/etc/httpd/conf.modules.d/00-base.conf
+/etc/httpd/conf.modules.d/00-dav.conf
+/etc/httpd/conf.modules.d/00-lua.conf
+/etc/httpd/conf.modules.d/00-mpm.conf
+/etc/httpd/conf.modules.d/00-optional.conf
+/etc/httpd/conf.modules.d/00-proxy.conf
+/etc/httpd/conf.modules.d/00-systemd.conf
+/etc/httpd/conf.modules.d/01-cgi.conf
+/etc/httpd/conf/httpd.conf
+/etc/httpd/conf/magic
+/etc/logrotate.d/httpd
+/etc/sysconfig/htcacheclean
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+```
+
+### main configuration file 
+
+```
+/etc/httpd/conf/httpd.conf
+```
+
+### lets explore main configuration file 
+
+```
+port is 80
+user and group is apache 
+/var/www/html/ is default webapp route 
+index.html is the name of default page
+```
+
+### checking syntax of  configuration 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ httpd -t
+Syntax OK
+```
+
+### lets start the service of httpd 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ sudo  systemctl  start  httpd
+[ec2-user@ip-172-31-13-105 ~]$ sudo  systemctl  status   httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sat 2023-06-03 07:07:56 UTC; 6s ago
+     Docs: man:httpd.service(8)
+ Main PID: 32752 (httpd)
+   Status: "Processing requests..."
+   CGroup: /system.slice/httpd.service
+
+```
+
+
+
