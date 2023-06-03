@@ -383,5 +383,24 @@ Syntax OK
            ├─2014 /usr/sbin/httpd -DFOREGROUND
 ```
 
+### My directory with vhost 
+
+```
+[ec2-user@ip-172-31-13-105 conf.d]$ cat  ashu.conf 
+<Virtualhost *:80>
+	servername me.ashutoshh.in
+	documentroot /var/www/task/
+	DirectoryIndex task.html
+</Virtualhost>
+[ec2-user@ip-172-31-13-105 conf.d]$ 
+
+
+```
+
+### restart httpd 
+
+```
+sudo systemctl restart httpd
+```
 
 
