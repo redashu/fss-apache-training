@@ -207,5 +207,98 @@ This is me Ashutoshh singh
 
 ### lets access the web page using any browser -- http://ip
 
+### setting auto-start option for httpd service 
+
+```
+sudo systemctl enable  httpd
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+
+```
+
+### configuration of Virtaul hosting -- Namebased hosting 
+
+<img src="ns.png">
+
+### more concept about Virtual hosting 
+
+<img src="vr.png">
+
+### taking two sample website from github 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ cd /var/www/html/
+[ec2-user@ip-172-31-13-105 html]$ ls
+index.html
+[ec2-user@ip-172-31-13-105 html]$ sudo rm index.html 
+[ec2-user@ip-172-31-13-105 html]$ ls
+[ec2-user@ip-172-31-13-105 html]$ 
+[ec2-user@ip-172-31-13-105 html]$ cd  
+[ec2-user@ip-172-31-13-105 ~]$ ls
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ git clone  https://github.com/microsoft/project-html-website.git
+-bash: git: command not found
+[ec2-user@ip-172-31-13-105 ~]$ sudo yum install git -y &>/dev/null 
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ git clone  https://github.com/microsoft/project-html-website.git
+Cloning into 'project-html-website'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 24 (delta 0), reused 3 (delta 0), pack-reused 19
+Receiving objects: 100% (24/24), 465.86 KiB | 6.29 MiB/s, done.
+[ec2-user@ip-172-31-13-105 ~]$ ls
+project-html-website
+[ec2-user@ip-172-31-13-105 ~]$ git clone https://github.com/schoolofdevops/html-sample-app.git
+Cloning into 'html-sample-app'...
+remote: Enumerating objects: 74, done.
+remote: Counting objects: 100% (74/74), done.
+remote: Compressing objects: 100% (69/69), done.
+remote: Total 74 (delta 5), reused 72 (delta 5), pack-reused 0
+Receiving objects: 100% (74/74), 1.38 MiB | 10.47 MiB/s, done.
+Resolving deltas: 100% (5/5), done.
+[ec2-user@ip-172-31-13-105 ~]$ ls
+html-sample-app  project-html-website
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+```
+
+### there are web app we cloned 
+
+### copy the first one to /var/www/html/ folder
+
+```
+ec2-user@ip-172-31-13-105 ~]$ ls
+html-sample-app  project-html-website
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ sudo cp  -rf  html-sample-app/*   /var/www/html/
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ ls  /var/www/html/
+LICENSE.txt  assets         generic.html         images
+README.txt   elements.html  html5up-phantom.zip  index.html
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+
+```
+
+### create a new folder and copy content there of second webapp
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ sudo   mkdir  /var/www/me1
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ ls
+html-sample-app  project-html-website
+[ec2-user@ip-172-31-13-105 ~]$ sudo cp -rf  project-html-website/*   /var/www/me1/
+[ec2-user@ip-172-31-13-105 ~]$ 
+[ec2-user@ip-172-31-13-105 ~]$ ls /var/www/me1/
+LICENSE  README.md  SECURITY.md  css  fonts  img  index.html
+[ec2-user@ip-172-31-13-105 ~]$ 
+
+
+```
+
+
+
 
 
