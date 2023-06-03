@@ -193,5 +193,19 @@ Syntax OK
 
 ```
 
+### CREATe web page named index.html under /var/www/html/
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ cd /var/www/html/
+[ec2-user@ip-172-31-13-105 html]$ ls
+[ec2-user@ip-172-31-13-105 html]$ sudo  vim   index.html 
+[ec2-user@ip-172-31-13-105 html]$ cat  index.html 
+Hello apache httpd  
+This is me Ashutoshh singh 
+[ec2-user@ip-172-31-13-105 html]$ 
+```
+
+### lets access the web page using any browser -- http://ip
+
 
 
