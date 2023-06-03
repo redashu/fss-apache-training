@@ -362,6 +362,26 @@ README  autoindex.conf  me.conf  me1.conf  userdir.conf  welcome.conf
 </Virtualhost>
 ```
 
+### after making entry we can check 
+
+```
+[ec2-user@ip-172-31-13-105 conf.d]$ httpd -t
+Syntax OK
+[ec2-user@ip-172-31-13-105 conf.d]$ 
+[ec2-user@ip-172-31-13-105 conf.d]$ 
+[ec2-user@ip-172-31-13-105 conf.d]$ sudo systemctl restart httpd
+[ec2-user@ip-172-31-13-105 conf.d]$ sudo systemctl status  httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sat 2023-06-03 09:57:07 UTC; 6s ago
+     Docs: man:httpd.service(8)
+ Main PID: 2012 (httpd)
+   Status: "Processing requests..."
+   CGroup: /system.slice/httpd.service
+           ├─2012 /usr/sbin/httpd -DFOREGROUND
+           ├─2013 /usr/sbin/httpd -DFOREGROUND
+           ├─2014 /usr/sbin/httpd -DFOREGROUND
+```
 
 
 
