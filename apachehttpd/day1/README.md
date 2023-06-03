@@ -298,6 +298,69 @@ LICENSE  README.md  SECURITY.md  css  fonts  img  index.html
 
 ```
 
+### Lets configure apache httpd to map virtual hosting 
+
+```
+ec2-user@ip-172-31-13-105 ~]$ rpm  -qc  httpd
+/etc/httpd/conf.d/autoindex.conf
+/etc/httpd/conf.d/userdir.conf
+/etc/httpd/conf.d/welcome.conf
+/etc/httpd/conf.modules.d/00-base.conf
+/etc/httpd/conf.modules.d/00-dav.conf
+/etc/httpd/conf.modules.d/00-lua.conf
+/etc/httpd/conf.modules.d/00-mpm.conf
+/etc/httpd/conf.modules.d/00-optional.conf
+/etc/httpd/conf.modules.d/00-proxy.conf
+/etc/httpd/conf.modules.d/00-systemd.conf
+/etc/httpd/conf.modules.d/01-cgi.conf
+/etc/httpd/conf/httpd.conf
+/etc/httpd/conf/magic
+/etc/logrotate.d/httpd
+/etc/sysconfig/htcacheclean
+[ec2-user@ip-172-31-13-105 ~]$ cd  /etc/httpd/conf
+conf/           conf.d/         conf.modules.d/ 
+[ec2-user@ip-172-31-13-105 ~]$ cd  /etc/httpd/conf.d/
+[ec2-user@ip-172-31-13-105 conf.d]$ ls
+README  autoindex.conf  userdir.conf  welcome.conf
+[ec2-user@ip-172-31-13-105 conf.d]$ 
+
+
+
+```
+
+
+### lets create conf files 
+
+```
+[ec2-user@ip-172-31-13-105 ~]$ cd  /etc/httpd/conf.d/
+[ec2-user@ip-172-31-13-105 conf.d]$ ls
+README  autoindex.conf  userdir.conf  welcome.conf
+
+[ec2-user@ip-172-31-13-105 conf.d]$ sudo  touch   me.conf  me1.conf 
+[ec2-user@ip-172-31-13-105 conf.d]$ ls
+README  autoindex.conf  me.conf  me1.conf  userdir.conf  welcome.conf
+[ec2-user@ip-172-31-13-105 conf.d]$ 
+
+
+```
+
+### content of me.conf 
+
+```
+<Virtualhost *:80>
+	servername me.ashutoshh.in
+	documentroot /var/www/html/
+</Virtualhost>
+```
+
+### me1.conf
+
+```
+<Virtualhost *:80>
+	servername me1.ashutoshh.in
+	documentroot /var/www/me1/
+</Virtualhost>
+```
 
 
 
