@@ -172,6 +172,30 @@ Syntax OK
 
 ```
 
+### Extending more acl cases 
+
+### creating sub pages in /var/www/html/
+
+```
+[root@ip-172-31-13-105 conf.d]# cd /var/www/html/
+[root@ip-172-31-13-105 html]# ls
+LICENSE.txt  README.txt  assets  elements.html  generic.html  html5up-phantom.zip  images  index.html
+[root@ip-172-31-13-105 html]# 
+[root@ip-172-31-13-105 html]# 
+[root@ip-172-31-13-105 html]# mkdir  secure  test 
+[root@ip-172-31-13-105 html]# ls
+LICENSE.txt  README.txt  assets  elements.html  generic.html  html5up-phantom.zip  images  index.html  secure  test
+[root@ip-172-31-13-105 html]# vim secure/index.html 
+[root@ip-172-31-13-105 html]# vim test/index.html 
+[root@ip-172-31-13-105 html]# ls  secure/   test/
+secure/:
+index.html
+
+test/:
+index.html
+[root@ip-172-31-13-105 html]# 
+```
+
 
 
 
