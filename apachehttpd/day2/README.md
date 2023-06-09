@@ -257,6 +257,53 @@ systemctl reload httpd
 
 <img src="hack.png">
 
+## Understanding SSL / tls 
+
+<img src="ssl.png">
+
+### process of SSL / TLS 
+
+<img src="ssltls.png">
+
+### self sign CA and key 
+
+```
+207  openssl  genrsa  2048  >private_key.pem 
+  208  ls
+  209  openssl req -key private_key.pem  -new -out ashu.csr 
+  210  ls
+  211  openssl x509 -signkey private_key.pem  -in ashu.csr  -out ashu.crt -req -days 365 
+```
+
+### process
+
+<img src="process.png">
+
+### just to implement SSL 
+
+```
+[root@ip-172-31-13-105 ~]# yum install mod_ssl 
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Package 1:mod_ssl-2.4.57-1.amzn2.x86_64 already installed and latest version
+Nothing to do
+[root@ip-172-31-13-105 ~]# httpd -M  | grep -i ssl 
+ ssl_module (shared)
+[root@ip-172-31-13-105 ~]# 
+```
+
+### checking ssl.conf file 
+
+```
+[root@ip-172-31-13-105 ~]# cd  /etc/httpd/
+[root@ip-172-31-13-105 httpd]# ls
+conf  conf.d  conf.modules.d  logs  modules  run  ssl-ok-ashutoshh  state
+[root@ip-172-31-13-105 httpd]# cd  conf.d/
+[root@ip-172-31-13-105 conf.d]# ls
+README  autoindex.conf  me.conf  me1.conf  ssl.conf  userdir.conf  welcome.conf
+[root@ip-172-31-13-105 conf.d]# 
+```
+
 
 
 
