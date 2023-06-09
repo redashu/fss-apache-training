@@ -83,5 +83,80 @@ Loaded Modules:
  access_compat_module (shared)
 ```
 
+## ACL in httpd modules names are changing 2.2 to 2.4 
+
+<img src="aclm.png">
+
+### checking modules 
+
+```
+[root@ip-172-31-13-105 conf.modules.d]# httpd -M  |  grep -i authz_host
+ authz_host_module (shared)
+[root@ip-172-31-13-105 conf.modules.d]# httpd -M  |  grep -i authz_core
+ authz_core_module (shared)
+[root@ip-172-31-13-105 conf.modules.d]# httpd -M  |  grep -i authz_
+ authz_core_module (shared)
+ authz_dbd_module (shared)
+ authz_dbm_module (shared)
+ authz_groupfile_module (shared)
+ authz_host_module (shared)
+ authz_owner_module (shared)
+ authz_user_module (shared)
+[root@ip-172-31-13-105 conf.modules.d]# 
+
+
+```
+
+### doing acl in vhost 
+
+```
+[root@ip-172-31-13-105 conf.modules.d]# cd  /etc/httpd/
+[root@ip-172-31-13-105 httpd]# ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+[root@ip-172-31-13-105 httpd]# cd  conf.d/
+[root@ip-172-31-13-105 conf.d]# ls
+README  autoindex.conf  me.conf  me1.conf  userdir.conf  welcome.conf
+[root@ip-172-31-13-105 conf.d]# cat  me.conf 
+<Virtualhost *:80>
+	servername me.ashutoshh.in
+	documentroot /var/www/html/
+</Virtualhost>
+[root@ip-172-31-13-105 conf.d]# vim me.conf 
+[root@ip-172-31-13-105 conf.d]# vim me.conf 
+[root@ip-172-31-13-105 conf.d]# cat  me.conf 
+<Virtualhost *:80>
+	servername ok.ashutoshh.in
+	documentroot /var/www/html/
+# use the style of authz_host which will work in 2.2 & 2.4 both 
+	<directory  /var/www/html/>
+		order allow,deny
+		allow from 192.168.2.100  10.10.0.0/24 
+		deny from all
+	</directory>
+</Virtualhost>
+
+```
+### checking syntax 
+
+```
+[root@ip-172-31-13-105 conf.d]# httpd -t
+Syntax OK
+
+```
+
+### loading apache httpd service 
+
+```
+[root@ip-172-31-13-105 conf.d]# systemctl reload httpd
+[root@ip-172-31-13-105 conf.d]# systemctl status  httpd
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Fri 2023-06-09 04:40:11 UTC; 42min ago
+     Docs: man:httpd.service(8)
+
+```
+
+
+
 
 
