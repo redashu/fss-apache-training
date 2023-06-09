@@ -156,6 +156,22 @@ Syntax OK
 
 ```
 
+### changing order can work 
+
+```
+<Virtualhost *:80>
+	servername ok.ashutoshh.in
+	documentroot /var/www/html/
+# use the style of authz_host which will work in 2.2 & 2.4 both 
+	<directory  /var/www/html/>
+		order deny,allow
+		deny from 192.168.2.100  10.10.0.0/24 
+		allow from all
+	</directory>
+</Virtualhost>
+
+```
+
 
 
 
