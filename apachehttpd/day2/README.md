@@ -324,4 +324,194 @@ ServerName ok.ashutoshh.in:443
  systemctl restart httpd
 ```
 
+### apache httpd installation using source code 
+
+## steps 
+
+### checking os version 
+
+```
+[root@ip-172-31-17-205 ~]# cat  /etc/os-release 
+NAME="Red Hat Enterprise Linux"
+VERSION="9.2 (Plow)"
+ID="rhel"
+
+```
+
+
+### Installing support of compiler and development tools for apache httpd sources 
+
+```
+[root@ip-172-31-17-205 ~]# yum install gcc pcre*  apr*  openssl-devel 
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+
+```
+
+### Redhat package Development tools installation 
+
+```
+[root@ip-172-31-17-205 ~]# yum  groupinstall  "development tools"
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use subscription-manager to register.
+
+Last metadata expiration check: 0:00:57 ago on Fri 09 Jun 2023 11:04:33 AM UTC.
+Dependencies resolved.
+======================================================================================================================
+ Package                               Arch    Version                              Repository                   Size
+======================================================================================================================
+Installing group/module packages:
+ asciidoc                              noarch  9.1.0-3.el9                          rhel-9-appstream-rhui-rpms  265 k
+ autoconf                              noarch  2.69
+```
+
+### Download source of apache httpd 
+
+```
+[root@ip-172-31-17-205 ~]# wget  https://dlcdn.apache.org/httpd/httpd-2.4.57.tar.gz
+--2023-06-09 11:08:15--  https://dlcdn.apache.org/httpd/httpd-2.4.57.tar.gz
+Resolving dlcdn.apache.org (dlcdn.apache.org)... 151.101.2.132, 2a04:4e42::644
+Connecting to dlcdn.apache.org (dlcdn.apache.org)|151.101.2.132|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9773385 (9.3M) [application/x-gzip]
+Saving to: ‘httpd-2.4.57.tar.gz’
+
+httpd-2.4.57.tar.gz           100%[===============================================>]   9.32M  --.-KB/s    in 0.1s    
+
+2023-06-09 11:08:15 (93.1 MB/s) - ‘httpd-2.4.57.tar.gz’ saved [9773385/9773385]
+
+[root@ip-172-31-17-205 ~]# ls
+httpd-2.4.57.tar.gz
+[root@ip-172-31-17-205 ~]# 
+```
+
+### extract it
+
+```
+[root@ip-172-31-17-205 ~]# ls
+httpd-2.4.57.tar.gz
+[root@ip-172-31-17-205 ~]# tar xvzf httpd-2.4.57.tar.gz 
+httpd-2.4.57/
+httpd-2.4.57/acinclude.m4
+httpd-2.4.57/README.cmake
+httpd-2.4.57/INSTALL
+httpd-2.4.57/CMakeLists.txt
+```
+
+### checking directory 
+
+```
+[root@ip-172-31-17-205 ~]# ls
+httpd-2.4.57  httpd-2.4.57.tar.gz
+[root@ip-172-31-17-205 ~]# 
+[root@ip-172-31-17-205 ~]# 
+[root@ip-172-31-17-205 ~]# cd   httpd-2.4.57
+[root@ip-172-31-17-205 httpd-2.4.57]# ls
+ABOUT_APACHE     BuildAll.dsp     configure     httpd.spec      libhttpd.mak   os                srclib
+acinclude.m4     BuildBin.dsp     configure.in  include         LICENSE        README            support
+Apache-apr2.dsw  buildconf        docs          INSTALL         Makefile.in    README.CHANGES    test
+Apache.dsw       CHANGES          emacs-style   InstallBin.dsp  Makefile.win   README.cmake      VERSIONING
+apache_probes.d  changes-entries  httpd.dep     LAYOUT          modules        README.platforms
+ap.d             CMakeLists.txt   httpd.dsp     libhttpd.dep    NOTICE         ROADMAP
+build            config.layout    httpd.mak     libhttpd.dsp    NWGNUmakefile  server
+[root@ip-172-31-17-205 httpd-2.4.57]# 
+```
+
+### setting up installation target directory 
+
+```
+[root@ip-172-31-17-205 httpd-2.4.57]# ls
+ABOUT_APACHE     BuildAll.dsp     configure     httpd.spec      libhttpd.mak   os                srclib
+acinclude.m4     BuildBin.dsp     configure.in  include         LICENSE        README            support
+Apache-apr2.dsw  buildconf        docs          INSTALL         Makefile.in    README.CHANGES    test
+Apache.dsw       CHANGES          emacs-style   InstallBin.dsp  Makefile.win   README.cmake      VERSIONING
+apache_probes.d  changes-entries  httpd.dep     LAYOUT          modules        README.platforms
+ap.d             CMakeLists.txt   httpd.dsp     libhttpd.dep    NOTICE         ROADMAP
+build            config.layout    httpd.mak     libhttpd.dsp    NWGNUmakefile  server
+[root@ip-172-31-17-205 httpd-2.4.57]# 
+[root@ip-172-31-17-205 httpd-2.4.57]# 
+[root@ip-172-31-17-205 httpd-2.4.57]# ./configure  --prefix=/etc/myhttpd
+checking for chosen layout... Apache
+checking for working mkdir -p... yes
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking build system type... x86_64-pc-linux-gnu
+
+```
+
+### compile source code 
+
+```
+[root@ip-172-31-17-205 httpd-2.4.57]# make 
+Making all in srclib
+make[1]: Entering directory '/root/httpd-2.4.57/srclib'
+make[1]: Leaving directory '/root/httpd-2.4.57/srclib'
+Making all in os
+make[1]: Entering directory '/root/httpd-2.4.57/os'
+Making all in unix
+
+```
+
+### install it 
+
+```
+[root@ip-172-31-17-205 httpd-2.4.57]# make install 
+Making install in srclib
+make[1]: Entering directory '/root/httpd-2.4.57/srclib'
+make[2]: Entering directory '/root/httpd-2.4.57/srclib'
+make[2]: Leaving directory '/root/httpd-2.4.57/srclib'
+make[1]: Leaving directory '/root/httpd-2.4.57/srclib'
+Making install in os
+make[1]: Entering directory '/root/httpd-2.4.57/os'
+Making install in unix
+make[2]: Entering directory '/root/httpd-2.4.57/os/un
+```
+
+### we can check and verify 
+
+```
+[root@ip-172-31-17-205 httpd-2.4.57]# cd  /etc/myhttpd/
+[root@ip-172-31-17-205 myhttpd]# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  man  manual  modules
+[root@ip-172-31-17-205 myhttpd]# cd conf/
+[root@ip-172-31-17-205 conf]# ls
+extra  httpd.conf  magic  mime.types  original
+```
+
+### staring the service 
+
+```
+
+[root@ip-172-31-17-205 myhttpd]# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  man  manual  modules
+[root@ip-172-31-17-205 myhttpd]# pwd
+/etc/myhttpd
+[root@ip-172-31-17-205 myhttpd]# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  man  manual  modules
+[root@ip-172-31-17-205 myhttpd]# cd bin/
+[root@ip-172-31-17-205 bin]# ls
+ab         apxs      dbmmanage  envvars-std  htcacheclean  htdigest  httpd      logresolve
+apachectl  checkgid  envvars    fcgistarter  htdbm         htpasswd  httxt2dbm  rotatelogs
+[root@ip-172-31-17-205 bin]# 
+[root@ip-172-31-17-205 bin]# ./apachectl -k start 
+[root@ip-172-31-17-205 bin]# yum install net-tools -y &>/dev/null 
+[root@ip-172-31-17-205 bin]# 
+[root@ip-172-31-17-205 bin]# 
+[root@ip-172-31-17-205 bin]# netstat -nlpt
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      34246/sshd: /usr/sb 
+tcp6       0      0 :::80                   :::*                    LISTEN      62020/httpd         
+tcp6       0      0 :::22                   :::*                    LISTEN      34246/sshd: /usr/sb 
+[root@ip-172-31-17-205 bin]# ./apachectl -k stop 
+[root@ip-172-31-17-205 bin]# ./httpd -D FOREGROUND |  BACKGROUND 
+
+```
+
+
 
