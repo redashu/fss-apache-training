@@ -514,4 +514,11 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 ```
 
 
+### TIP 
+
+```
+[root@ip-172-31-17-205 bin]# ./configure  --prefix=/etc/myhttpd  --enable-modes-shares=all  --enable-proxy --enable-ssl  
+```
+
+
 
