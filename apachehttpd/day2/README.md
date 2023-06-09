@@ -305,7 +305,23 @@ README  autoindex.conf  me.conf  me1.conf  ssl.conf  userdir.conf  welcome.conf
 ```
 
 
+### update servername and documentroot in ssl.conf --
+
+```
+
+<VirtualHost _default_:443>
+
+# General setup for the virtual host, inherited from global configuration
+DocumentRoot "/var/www/html"
+ServerName ok.ashutoshh.in:443
 
 
+```
+
+### restart httpd 
+
+```
+ systemctl restart httpd
+```
 
 
