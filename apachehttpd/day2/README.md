@@ -197,6 +197,68 @@ index.html
 ```
 
 
+## alternative of Virtaulhost conf is  documentroot based configuration -- using .htaccess 
+
+### we can have config of  /var/www/html/. location in the same folder by then name of .htaccess 
+
+```
+
+[root@ip-172-31-13-105 html]# cat  /etc/httpd/conf.d/me.conf 
+<Virtualhost *:80>
+	servername ok.ashutoshh.in
+	documentroot /var/www/html/
+# use the style of authz_host which will work in 2.2 & 2.4 both 
+	<directory  /var/www/html/>
+		AllowOverride all
+		require all granted
+	</directory>
+</Virtualhost>
+
+
+[root@ip-172-31-13-105 html]# 
+[root@ip-172-31-13-105 html]# cd /var/www/html/
+[root@ip-172-31-13-105 html]# cat .htaccess 
+order deny,allow
+deny from 127.0.0.1 10.0.0.0/16
+allow from all
+
+# for error page
+ErrorDocument  404  /404.html
+
+```
+
+### 
+
+```
+systemctl reload httpd 
+```
+
+### Problem with HTTP protocol 
+
+<img src="httpprob.png">
+
+### Introduce cryptography model -- and symteric key concept
+
+<img src="key1.png">
+
+### Introducing assymetric key model 
+
+<img src="asm.png">
+
+### private & public key model is only one way security 
+
+<img src="pro.png">
+
+### Hybrid model compromised then SSL / TLS make in picture 
+
+<img src="hc.png">
+
+### using it here 
+
+<img src="hack.png">
+
+
+
 
 
 
