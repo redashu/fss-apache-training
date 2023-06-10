@@ -585,5 +585,149 @@ Bye
 ```
 
 
+### lets read data from mysql table using SQL query 
+
+```
+[root@ip-172-31-4-196 ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 17
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employee           |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [(none)]> use employee;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [employee]> show tables;
++--------------------+
+| Tables_in_employee |
++--------------------+
+| sales_emp          |
++--------------------+
+1 row in set (0.00 sec)
+
+MariaDB [employee]> desc sales_emp;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | char(30)     | NO   |     | NULL    |                |
+| email   | varchar(30)  | NO   |     | NULL    |                |
+| contact | int(10)      | NO   |     | NULL    |                |
+| remarks | varchar(100) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+======>
+MariaDB [employee]> select  id   from   sales_emp;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
+|  5 |
++----+
+5 rows in set (0.00 sec)
+
+MariaDB [employee]> select  id,email   from   sales_emp;
++----+---------------------+
+| id | email               |
++----+---------------------+
+|  1 | ashutoshh@linux.com |
+|  2 | rd@hotmail.com      |
+|  3 | sr@xyz.com          |
+|  4 | sr@ok.in            |
+|  5 | vr@k.in             |
++----+---------------------+
+5 rows in set (0.00 sec)
+
+MariaDB [employee]> select  id,email,name   from   sales_emp;
++----+---------------------+-----------+
+| id | email               | name      |
++----+---------------------+-----------+
+|  1 | ashutoshh@linux.com | ashutoshh |
+|  2 | rd@hotmail.com      | rudra     |
+|  3 | sr@xyz.com          | suresh    |
+|  4 | sr@ok.in            | surbhi    |
+|  5 | vr@k.in             | vikram    |
++----+---------------------+-----------+
+5 rows in set (0.00 sec)
+
+MariaDB [employee]> select  *   from   sales_emp;
++----+-----------+---------------------+------------+----------------------------+
+| id | name      | email               | contact    | remarks                    |
++----+-----------+---------------------+------------+----------------------------+
+|  1 | ashutoshh | ashutoshh@linux.com | 2147483647 | Good Job in may 2023 month |
+|  2 | rudra     | rd@hotmail.com      | 1234567899 | ok                         |
+|  3 | suresh    | sr@xyz.com          | 2147483647 | NULL                       |
+|  4 | surbhi    | sr@ok.in            | 2147483647 | NULL                       |
+|  5 | vikram    | vr@k.in             | 2147483647 | NULL                       |
++----+-----------+---------------------+------------+----------------------------+
+5 rows in set (0.00 sec)
+
+
+```
+
+###  More search Queiry 
+
+```
+
+MariaDB [employee]> insert into sales_emp (email,name,contact)
+    -> values ('rdd1@hotmail.com','rudra k','88888888');
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [employee]> select  *   from   sales_emp;
+MariaDB [employee]> select  *   from   sales_emp;
++----+-----------+---------------------+------------+----------------------------+
+| id | name      | email               | contact    | remarks                    |
++----+-----------+---------------------+------------+----------------------------+
+|  1 | ashutoshh | ashutoshh@linux.com | 2147483647 | Good Job in may 2023 month |
+|  2 | rudra     | rd@hotmail.com      | 1234567899 | ok                         |
+|  3 | suresh    | sr@xyz.com          | 2147483647 | NULL                       |
+|  4 | surbhi    | sr@ok.in            | 2147483647 | NULL                       |
+|  5 | vikram    | vr@k.in             | 2147483647 | NULL                       |
+|  6 | rudra k   | rdd1@hotmail.com    |   88888888 | NULL                       |
++----+-----------+---------------------+------------+----------------------------+
+6 rows in set (0.00 sec)
+
+MariaDB [employee]> 
+MariaDB [employee]> 
+MariaDB [employee]> select  *   from  sales_emp  where id = 2 ; 
++----+-------+----------------+------------+---------+
+| id | name  | email          | contact    | remarks |
++----+-------+----------------+------------+---------+
+|  2 | rudra | rd@hotmail.com | 1234567899 | ok      |
++----+-------+----------------+------------+---------+
+1 row in set (0.00 sec)
+
+MariaDB [employee]> select  email   from  sales_emp  where id = 2 ; 
++----------------+
+| email          |
++----------------+
+| rd@hotmail.com |
++----------------+
+1 row in set (0.00 sec)
+
+
+```
 
 
