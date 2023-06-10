@@ -730,4 +730,32 @@ MariaDB [employee]> select  email   from  sales_emp  where id = 2 ;
 
 ```
 
+### MYSQL user section 
+
+```
+[root@ip-172-31-4-196 ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 18
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create  user  'hello'@'%'  identified by 'xyz@123';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> 
+MariaDB [(none)]> grant ALL privileges  on employee.*  to 'hello'@'%';
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [(none)]> 
+
+```
+
+
 
