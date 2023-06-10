@@ -506,6 +506,83 @@ MariaDB [employee]> desc sales_emp;
 
 ```
 
+### lets write some data into above table using below given things 
+
+```
+[root@ip-172-31-4-196 ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employee           |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [(none)]> use employee;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [employee]> show tables;
++--------------------+
+| Tables_in_employee |
++--------------------+
+| sales_emp          |
++--------------------+
+1 row in set (0.00 sec)
+
+MariaDB [employee]> desc  slaes_emp;
+ERROR 1146 (42S02): Table 'employee.slaes_emp' doesn't exist
+MariaDB [employee]> desc  sales_emp;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | char(30)     | NO   |     | NULL    |                |
+| email   | varchar(30)  | NO   |     | NULL    |                |
+| contact | int(10)      | NO   |     | NULL    |                |
+| remarks | varchar(100) | YES  |     | NULL    |                |
++---------+--------------+------+-----+----
+
+MariaDB [employee]> INSERT INTO sales_emp (id, name, email, contact, remarks) 
+values 
+(1,'ashutoshh','ashutoshh@linux.com',9509978798,'Good Job in may 2023 month') , 
+(2,'rudra','rd@hotmail.com',1234567899,"ok");
+
+
+Query OK, 2 rows affected, 1 warning (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 1
+
+
+```
+### trying again to show you
+
+```
+MariaDB [employee]> 
+MariaDB [employee]> insert into sales_emp (name,email,contact)
+    -> values
+    -> ('suresh','sr@xyz.com',8787878767),
+    -> ('surbhi','sr@ok.in',9898989898),
+    -> ('vikram','vr@k.in',7878453423);
+Query OK, 3 rows affected, 3 warnings (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 3
+
+MariaDB [employee]> exit;
+Bye
+
+```
 
 
 
