@@ -351,5 +351,11 @@ MariaDB [(none)]> exit;
 Bye
 ```
 
+### under schema also 
+
+<img src="schema.png">
+
+
+
 
 
