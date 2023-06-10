@@ -355,6 +355,157 @@ Bye
 
 <img src="schema.png">
 
+## SQL query 
+
+### showing list of databases
+
+```
+[root@ip-172-31-4-196 ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+
+```
+
+### creating a new database
+
+```
+MariaDB [(none)]> create  database  employee;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| employee           |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+```
+
+### checking in the backend of os hard disk 
+
+```
+[root@ip-172-31-4-196 ~]# cd  /var/lib/mysql/
+[root@ip-172-31-4-196 mysql]# ls
+aria_log.00000001  employee     ib_logfile1  mysql       performance_schema
+aria_log_control   ib_logfile0  ibdata1      mysql.sock
+[root@ip-172-31-4-196 mysql]# 
+
+```
+
+### SQL more query 
+
+## changing database 
+
+```
+MariaDB [(none)]> use employee ;
+Database changed
+MariaDB [employee]> 
+```
+
+### checking tables 
+
+```
+Database changed
+MariaDB [employee]> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [mysql]> 
+MariaDB [mysql]> 
+MariaDB [mysql]> show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| general_log              
+
+```
+
+### checking schema of a table
+
+```
+MariaDB [mysql]> desc  user;
++------------------------+-----------------------------------+------+-----+---------+-------+
+| Field                  | Type                              | Null | Key | Default | Extra |
++------------------------+-----------------------------------+------+-----+---------+-------+
+| Host                   | char(60)                          | NO   | PRI |         |       |
+| User                   | char(16)                          | NO   | PRI |         |       |
+| Password               | char(41)                          | NO   |     |         |       |
+| Select_priv            | enum('N','Y')                     | NO   |     | N       |       |
+| Insert_priv            | enum('N','Y')                     | NO   |     | N       |       |
+| Update_priv            | enum('N','Y')                     | NO   |     | N       |       |
+| Delete_priv            | enum('N','Y')                     | NO   |     | N       |       |
+| Create_priv            | enum('N','Y')                 
+```
+
+### creating table 
+
+```
+MariaDB [employee]> show tables;
+Empty set (0.00 sec)
+
+MariaDB [employee]> create table sales_emp (
+    -> id INT AUTO_INCREMENT PRIMARY KEY ,
+    -> name CHAR(30) NOT NULL,
+    -> email VARCHAR(30) NOT NULL,
+    -> contact INT(10) NOT NULL,
+    -> remarks VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.00 sec)
+
+MariaDB [employee]> show tables;
++--------------------+
+| Tables_in_employee |
++--------------------+
+| sales_emp          |
++--------------------+
+1 row in set (0.00 sec)
+
+```
+
+### checking schema of table 
+
+```
+MariaDB [employee]> desc sales_emp;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | char(30)     | NO   |     | NULL    |                |
+| email   | varchar(30)  | NO   |     | NULL    |                |
+| contact | int(10)      | NO   |     | NULL    |                |
+| remarks | varchar(100) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+
+```
+
 
 
 
