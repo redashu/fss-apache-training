@@ -265,4 +265,17 @@ Thanks for using MariaDB!
 
 ```
 
+## Understanding client of mysql 
+
+<img src="dbclients.png">
+
+### more info about db client side 
+
+<img src="dbc.png">
+
+## Overall understanding of mysql database with client , engine and connection language
+
+<img src="final.png">
+
+
 
