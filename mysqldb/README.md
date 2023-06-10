@@ -766,5 +766,20 @@ MariaDB [(none)]>
 <img src="mysqlcls.png">
 
 
+### RDS db login 
 
+```
+[root@ip-172-31-4-196 ~]# mysql -u admin -h ashutoshh-db-server.cs0yvdoffhxb.us-east-2.rds.amazonaws.com  -p 
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 5.7.42-log Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> 
+
+```
 
