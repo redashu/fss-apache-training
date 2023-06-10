@@ -277,5 +277,79 @@ Thanks for using MariaDB!
 
 <img src="final.png">
 
+## Connecting to mYSQl server using mysqcl cli -- for SQL 
+
+```
+[root@ip-172-31-4-196 ~]# mysql 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+[root@ip-172-31-4-196 ~]# 
+[root@ip-172-31-4-196 ~]# mysql -u root  -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
+
+
+```
+
+### USIng SQL qeury we are interacting with database 
+
+```
+[root@ip-172-31-4-196 ~]# mysql 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+[root@ip-172-31-4-196 ~]# 
+[root@ip-172-31-4-196 ~]# mysql -u root  -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 5.5.68-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
+
+
+```
+
+### listing by default avaiable database 
+
+```
+MariaDB [(none)]> show databases ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+MariaDB [(none)]> SHOW dataBases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+```
+
+### to quit use exit 
+
+```
+MariaDB [(none)]> exit;
+Bye
+```
+
 
 
