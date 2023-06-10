@@ -757,5 +757,14 @@ MariaDB [(none)]>
 
 ```
 
+## problem with Single machine / instance of Database 
+
+<img src="prob2.png">
+
+### mysql master and slave -- read replica cluster 
+
+<img src="mysqlcls.png">
+
+
 
 
