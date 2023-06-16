@@ -394,5 +394,10 @@ mysql> show slave status;
 
 ```
 
+## POstgresSQL and mysql 
+
+<img src="postmy.png">
+
+
 
 
