@@ -150,5 +150,20 @@ postgres=# \q
 
 ```
 
+### connecting from postgres system user to run psql command
+
+```
+[postgres@ip-172-31-28-149 ~]$ psql 
+psql (13.10)
+Type "help" for help.
+
+postgres=# \conninfo 
+You are connected to database "postgres" as user "postgres" via socket in "/var/run/postgresql" at port "5432".
+postgres=# 
+
+
+```
+
+
 
 
