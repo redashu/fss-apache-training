@@ -143,5 +143,26 @@ Empty set (0.00 sec)
 
 <img src="cluster1.png">
 
+### two cases of db clustering in above setup
+
+<img src="dbcls.png">
+
+## setup of MYsql master and one Read replication (slave)
+
+### Requirements 
+
+### vm1 & vm2 
+
+### Vm1 -- master &  vm2 as slave 
+
+### Things to do on both VM 
+
+<ol>
+  <li> Install mysql-server </li>
+   <li> configure mysql-server </li>
+   <li> start servcie  </li>
+   <li> setup root password  </li>
+ 
+</ol>
 
 
