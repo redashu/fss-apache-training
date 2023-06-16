@@ -311,6 +311,88 @@ mysql> show master status;
 
 ## Done with Master side changes 
 
+# COnfigure Slave to connect master 
+
+### configure server-id here alos
+
+```
+root@mysql-read1 ~]# cd  /etc/my.cnf.d/
+[root@mysql-read1 my.cnf.d]# ls
+client.cnf  mysql-server.cnf
+[root@mysql-read1 my.cnf.d]# vim mysql-server.cnf 
+[root@mysql-read1 my.cnf.d]# cat mysql-server.cnf 
+#
+# This group are read by MySQL server.
+# Use it for options that only the server (but not clients) should see
+#
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/en/server-configuration-defaults.html
+
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mysqld according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-error=/var/log/mysql/mysqld.log
+pid-file=/run/mysqld/mysqld.pid
+
+# server id of slave machine 
+server-id = 2 
+[root@mysql-read1 my.cnf.d]# systemctl restart mysql 
+Failed to restart mysql.service: Unit mysql.service not found.
+[root@mysql-read1 my.cnf.d]# systemctl restart mysqld
+[root@mysql-read1 my.cnf.d]# systemctl status  mysqld
+● mysqld.service - MySQL 8.0 database server
+     Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; preset: disabled)
+     Active: active (running) since Fri 2023-06-16 08:51:13 UTC; 7s ago
+    Process: 15843 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)
+    Process: 15865 ExecStartPre=/usr/libexec/mysql-prepare-db-dir mysqld.service (code=exited, status=0/SUCCESS)
+   Main PID: 15899 (mysqld)
+     Status: "Server is operational"
+      Tasks: 39 (limit: 10863)
+     Memory: 368.4M
+        CPU: 872ms
+     CGroup: /system.slice/mysqld.service
+             └─15899 /usr/libexec/mysqld --basedir=/usr
+
+
+```
+
+### Connecting mysql master server
+
+```
+[root@mysql-read1 my.cnf.d]# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 Source distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> change master to 
+    -> MASTER_HOST='172.31.17.219',
+    -> MASTER_USER='replica',
+    -> MASTER_PASSWORD='Redhat@123',
+    -> MASTER_PORT=3306,
+    -> MASTER_CONNECT_RETRY=9,
+    -> MASTER_LOG_FILE='binlog.000002';
+Query OK, 0 rows affected, 10 warnings (0.02 sec)
+
+mysql> start slave;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> show slave status;
+
+```
 
 
 
