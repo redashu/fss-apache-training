@@ -77,5 +77,9 @@ Installing dependencies:
 dnf  module  install postgresql:15/server
 ```
 
+## Initailize configuration 
 
+```
+
+```
 
