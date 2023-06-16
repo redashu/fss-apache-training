@@ -135,3 +135,13 @@ Empty set (0.00 sec)
 ```
 
 
+## Problem with Single Instance of Db 
+
+<img src="prob2.png">
+
+## Master and Read replication type db cluster in mysql 
+
+<img src="cluster1.png">
+
+
+
