@@ -117,3 +117,21 @@ mysql> show tables;
 Empty set (0.00 sec)
 
 ```
+
+### some useful commands 
+
+```
+ 9  yum history list
+   10  dnf  history list
+   11  yum history undo  2
+   12  yum history undo  3
+   13  dnf  history list
+   14  yum history undo  2
+   15  yum install mysql-server
+   16  rpm -qa  mysql*
+   17  rpm -qa  |  grep -in mysql*
+   18  yum install mysql-server  --skip-broken
+   19  yum install mysql-server  --skip-broken --nobest
+```
+
+
