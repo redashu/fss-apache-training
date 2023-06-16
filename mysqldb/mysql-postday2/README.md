@@ -166,3 +166,151 @@ Empty set (0.00 sec)
 </ol>
 
 
+### Things to verify in both vm 
+
+```
+[root@mysql-master ~]# rpm -q mysql-server 
+mysql-server-8.0.32-1.el9_2.x86_64
+[root@mysql-master ~]# 
+[root@mysql-master ~]# systemctl status mysqld
+● mysqld.service - MySQL 8.0 database server
+     Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; preset: disabled)
+     Active: active (running) since Fri 2023-06-16 06:05:52 UTC; 2h 33min ago
+   Main PID: 15236 (mysqld)
+     Status: "Server is operational"
+      Tasks: 39 (limit: 10863)
+     Memory: 476.6M
+        CPU: 31.995s
+     CGroup: /system.slice/mysqld.service
+             └─15236 /usr/libexec/mysqld --basedir=/usr
+
+Jun 16 06:05:42 ip-172-31-17-219.us-east-2.compute.internal systemd[1]: Starting MySQL 8.0 database server...
+Jun 16 06:05:42 ip-172-31-17-219.us-east-2.compute.internal mysql-prepare-db-dir[15163]: Initializing MySQL database
+Jun 16 06:05:52 ip-172-31-17-219.us-east-2.compute.internal systemd[1]: Started MySQL 8.0 database server.
+[root@mysql-master ~]# 
+[root@mysql-master ~]# 
+[root@mysql-master ~]# mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.32 Source distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> ^DBye
+
+```
+
+## COnfigure Master server 
+
+### checking configuration directory 
+
+```
+[root@mysql-master ~]# cd  /etc/my.cnf.d/
+[root@mysql-master my.cnf.d]# ls
+client.cnf  mysql-server.cnf
+[root@mysql-master my.cnf.d]# 
+[root@mysql-master my.cnf.d]# 
+[root@mysql-master my.cnf.d]# cat  /etc/my.cnf 
+#
+# This group is read both both by the client and the server
+# use it for options that affect everything
+#
+[client-server]
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+
+[root@mysql-master my.cnf.d]#
+
+=========>
+
+```
+
+### fixing some server id 
+
+```
+ls
+client.cnf  mysql-server.cnf
+[root@mysql-master my.cnf.d]# vim mysql-server.cnf 
+[root@mysql-master my.cnf.d]# cat  mysql-server.cnf 
+#
+# This group are read by MySQL server.
+# Use it for options that only the server (but not clients) should see
+#
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/en/server-configuration-defaults.html
+
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mysqld according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-error=/var/log/mysql/mysqld.log
+pid-file=/run/mysqld/mysqld.pid
+
+# defining id of mysql master machine
+server-id = 1
+[root@mysql-master my.cnf.d]#
+
+=======> Restart service
+
+[root@mysql-master my.cnf.d]# systemctl restart mysqld
+```
+
+### create a user for replication purpose in master server
+
+```
+mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 Source distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create user  'replica'@'%' identified by 'Redhat@123';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> grant REPLICATION SLAVE , REPLICATION CLIENT on  *.*  to  'replica'@'%';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH TABLES with read lock;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> show master status;
++---------------+----------+--------------+------------------+-------------------+
+| File          | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++---------------+----------+--------------+------------------+-------------------+
+| binlog.000002 |      883 |              |                  |                   |
++---------------+----------+--------------+------------------+-------------------+
+1 row in set (0.00 sec)
+
+```
+
+## Done with Master side changes 
+
+
+
+
