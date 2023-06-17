@@ -145,6 +145,66 @@ mysql> show index from  emp;
 
 ```
 
+## Tuning with mysql configuration 
+
+```
+
+mysql> 
+mysql> show variables LIKE 'max_connections';
++-----------------+-------+
+| Variable_name   | Value |
++-----------------+-------+
+| max_connections | 151   |
++-----------------+-------+
+1 row in set (0.00 sec)
+
+mysql> show variables LIKE 'innodb_buffer_pool_size';
++-------------------------+-----------+
+| Variable_name           | Value     |
++-------------------------+-----------+
+| innodb_buffer_pool_size | 134217728 |
++-------------------------+-----------+
+```
+
+### lets change from config file
+
+```
+[root@ip-172-31-19-149 ~]# cat  /etc/my.cnf.d/mysql-server.cnf 
+#
+# This group are read by MySQL server.
+# Use it for options that only the server (but not clients) should see
+#
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/en/server-configuration-defaults.html
+
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mysqld according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-error=/var/log/mysql/mysqld.log
+pid-file=/run/mysqld/mysqld.pid
+
+# some performance tuning parameter also 
+max_connections=200
+innodb_buffer_pool_size=3G # you can use M , G , K , B 
+```
+
+### restart mysql service
+
+```
+root@ip-172-31-19-149 ~]# systemctl restart mysqld
+[root@ip-172-31-19-149 ~]# systemctl status  mysqld
+● mysqld.service - MySQL 8.0 database server
+     Loaded: loaded (/usr/lib/systemd/system/mysqld.service; disabled; preset: disabled)
+     Active: active (running) since Sat 2023-06-17 05:25:21 UTC; 7s ago
+    Process: 15711 ExecStartPre=/usr/libexec/mysql-check-socket (code=exited, status=0/SUCCESS)
+    Process: 15733 ExecStartPre=/usr/libexec/
+```
+
 
 
 
