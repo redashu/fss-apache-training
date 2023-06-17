@@ -634,5 +634,127 @@ total 16K
 -rw-r--r--.  1 postgres postgres 1.9K Jun 17 09:33 ashudb_backup.sql
 ```
 
+# Users in Postgres 
 
+### we have to create system user first 
+
+```
+[root@ip-172-31-30-55 ~]# useradd   jack 
+[root@ip-172-31-30-55 ~]# passwd jack 
+Changing password for user jack.
+New password: 
+
+```
+
+### by default from database point of view only postgres user is allowed on the system to use psql command
+
+```
+postgres@ip-172-31-30-55 ~]$ psql
+psql (13.10)
+Type "help" for help.
+
+postgres=# 
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+
+```
+
+## adding a system user to postgres user list -- role list
+
+```
+[root@ip-172-31-30-55 ~]# su  - postgres 
+Last login: Sat Jun 17 09:46:08 UTC 2023 on pts/0
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ id
+uid=26(postgres) gid=26(postgres) groups=26(postgres) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ createuser  --interactive  --pwprompt 
+Enter name of role to add: jack
+Enter password for new role: 
+Enter it again: 
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) y
+Shall the new role be allowed to create more new roles? (y/n) n
+[postgres@ip-172-31-30-55 ~]$ 
+
+```
+
+### checking it 
+
+```
+[postgres@ip-172-31-30-55 ~]$ psql
+psql (13.10)
+Type "help" for help.
+
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ jack      | Create DB                                                  | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+postgres=# 
+
+
+```
+
+### psql need host os auth to login into database as per roles acceptance
+
+```
+[postgres@ip-172-31-30-55 ~]$ psql  -U jack -d  postgres
+psql: error: FATAL:  Peer authentication failed for user "jack"
+[postgres@ip-172-31-30-55 ~]$ 
+logout
+[root@ip-172-31-30-55 ~]# 
+[root@ip-172-31-30-55 ~]# su - jack 
+Last login: Sat Jun 17 09:45:04 UTC 2023 on pts/0
+[jack@ip-172-31-30-55 ~]$ whoami
+jack
+[jack@ip-172-31-30-55 ~]$ psql  -U jack -d  postgres
+psql (13.10)
+Type "help" for help.
+
+postgres=> \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+postgres=> \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of 
+-----------+------------------------------------------------------------+-----------
+ jack      | Create DB                                                  | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+postgres=> create database hellojack;
+CREATE DATABASE
+postgres=> \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ hellojack | jack     | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ mydb      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=> \q
+
+```
 
