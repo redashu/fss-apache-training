@@ -474,5 +474,106 @@ Indexes:
 
 ```
 
+### Revision 
+
+```
+[ec2-user@ip-172-31-26-24 ~]$ su - postgres 
+Password: 
+Last login: Sat Jun 17 07:05:05 UTC 2023 on pts/0
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ whoami
+postgres
+[postgres@ip-172-31-26-24 ~]$ psql 
+psql (13.10)
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ ashudb    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \c ashudb
+You are now connected to database "ashudb" as user "postgres".
+ashudb=# \d
+             List of relations
+ Schema |    Name    |   Type   |  Owner   
+--------+------------+----------+----------
+ public | emp        | table    | postgres
+ public | emp_id_seq | sequence | postgres
+(2 rows)
+
+ashudb=# \d emp
+                                    Table "public.emp"
+ Column  |         Type          | Collation | Nullable |             Default             
+---------+-----------------------+-----------+----------+---------------------------------
+ id      | integer               |           | not null | nextval('emp_id_seq'::regclass)
+ name    | character(20)         |           | not null | 
+ email   | character varying(30) |           | not null | 
+ remarks | character varying(50) |           |          | 
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (id)
+
+
+```
+
+### insert data in table
+
+```
+shudb=# \d emp
+                                    Table "public.emp"
+ Column  |         Type          | Collation | Nullable |             Default             
+---------+-----------------------+-----------+----------+---------------------------------
+ id      | integer               |           | not null | nextval('emp_id_seq'::regclass)
+ name    | character(20)         |           | not null | 
+ email   | character varying(30) |           | not null | 
+ remarks | character varying(50) |           |          | 
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (id)
+
+ashudb=# INSERT INTO emp (name,email)
+ashudb-# values 
+ashudb-# ('ashu','ashutoshh@linux.com'),
+ashudb-# ('tr','tr@google.com');
+INSERT 0 2
+ashudb=# 
+
+```
+
+### read info 
+
+```
+ashudb=# select * from emp;
+ id |         name         |        email        | remarks 
+----+----------------------+---------------------+---------
+  1 | ashu                 | ashutoshh@linux.com | 
+  2 | tr                   | tr@google.com       | 
+(2 rows)
+
+ashudb=# select email  from emp;
+        email        
+---------------------
+ ashutoshh@linux.com
+ tr@google.com
+(2 rows)
+
+ashudb=# select email  from emp where id=1;
+        email        
+---------------------
+ ashutoshh@linux.com
+(1 row)
+
+ashudb=# \q
+
+```
+
+
 
 
