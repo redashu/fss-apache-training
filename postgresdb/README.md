@@ -578,6 +578,61 @@ ashudb=# \q
 
 <img src="t2.png">
 
+##  Backup of ANy database -- 
+
+<img src="backup.png">
+
+### taking backup of postgresql --using pg_dump
+
+```
+[postgres@ip-172-31-26-24 ~]$ id
+uid=26(postgres) gid=26(postgres) groups=26(postgres) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ psql 
+psql (13.10)
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ ashudb    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \q
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ pg_
+pg_basebackup    pg_controldata   pg_dump          pg_isready       pg_recvlogical   pg_restore       pg_upgrade       
+pg_checksums     pg_ctl           pg_dumpall       pg_receivewal    pg_resetwal      pg_rewind        pg_verifybackup  
+[postgres@ip-172-31-26-24 ~]$ pg_dump  ashudb  
+--
+-- PostgreSQL database dump
+--
+
+
+======>storing in a file
+
+[postgres@ip-172-31-26-24 ~]$ pg_dump  ashudb   >ashudb_backup.sql 
+[postgres@ip-172-31-26-24 ~]$ ls
+ashudb_backup.sql
+```
+
+### all the database backup --
+
+```
+[postgres@ip-172-31-26-24 ~]$ pg_dumpall  >alldb.sql 
+[postgres@ip-172-31-26-24 ~]$ ls
+alldb.sql  ashudb_backup.sql  backups  data  initdb_postgresql.log
+[postgres@ip-172-31-26-24 ~]$ ls -lh 
+total 16K
+-rw-r--r--.  1 postgres postgres 3.9K Jun 17 09:34 alldb.sql
+-rw-r--r--.  1 postgres postgres 1.9K Jun 17 09:33 ashudb_backup.sql
+```
 
 
 
