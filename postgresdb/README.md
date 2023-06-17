@@ -436,7 +436,43 @@ ashudb=#
 ## Creating table im postgresql 
 
 ```
+ashudb=# \dt
+Did not find any relations.
+ashudb=# 
+ashudb=# create table  emp (
+ashudb(# id SERIAL primary key ,
+ashudb(# name char(20) not null,
+ashudb(# email varchar(30) not null,
+ashudb(# remarks varchar(50) 
+ashudb(# );
+CREATE TABLE
+ashudb=# \dt
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | emp  | table | postgres
+(1 row)
+
 
 ```
+
+### checking schema of table 
+
+```
+ashudb=# \d   emp ;
+                                    Table "public.emp"
+ Column  |         Type          | Collation | Nullable |             Default             
+---------+-----------------------+-----------+----------+---------------------------------
+ id      | integer               |           | not null | nextval('emp_id_seq'::regclass)
+ name    | character(20)         |           | not null | 
+ email   | character varying(30) |           | not null | 
+ remarks | character varying(50) |           |          | 
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (id)
+
+\d: extra argument ";" ignored
+
+```
+
 
 
