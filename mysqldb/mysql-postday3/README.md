@@ -114,4 +114,37 @@ mysql> select * from emp;
 
 ```
 
+### doing indexing of table columns 
+```
+mysql> desc emp;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| name    | char(20)    | NO   |     | NULL    |                |
+| email   | varchar(30) | NO   |     | NULL    |                |
+| contact | int         | NO   |     | NULL    |                |
+| remarks | varchar(50) | NO   |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> create index  emp_index_for_sales  on  emp (email,contact);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> show index from  emp;
++-------+------------+---------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table | Non_unique | Key_name            | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------+------------+---------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| emp   |          0 | PRIMARY             |            1 | id          | A         |           2 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| emp   |          1 | emp_index_for_sales |            1 | email       | A         |           2 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| emp   |          1 | emp_index_for_sales |            2 | contact     | A         |           2 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++-------+------------+---------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+3 rows in set (0.00 sec)
+
+```
+
+
+
 
