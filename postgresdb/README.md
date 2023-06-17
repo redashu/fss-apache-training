@@ -164,6 +164,46 @@ postgres=#
 
 ```
 
+# POstgreSQL as per the best practice 
+
+<img src="pgsql.png">
+
+### installing and see the changes on system 
+
+```
+[root@ip-172-31-26-24 ~]# hostnamectl 
+ Static hostname: ip-172-31-26-24.us-east-2.compute.internal
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 81e4e09b3d3c463f8b45ba854caa3ed7
+         Boot ID: 164dafb565e345539375c4345ab91836
+  Virtualization: xen
+Operating System: Red Hat Enterprise Linux 9.2 (Plow)       
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:9::baseos
+          Kernel: Linux 5.14.0-284.11.1.el9_2.x86_64
+    Architecture: x86-64
+ Hardware Vendor: Xen
+  Hardware Model: HVM domU
+Firmware Version: 4.11.amazon
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# rpm -qa postgresql* 
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# grep -in postgres  /etc/passwd
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# dnf install postgresql-server -y  &>/dev/null 
+[root@ip-172-31-26-24 ~]# rpm -qa postgresql* 
+postgresql-private-libs-13.10-1.el9_1.x86_64
+postgresql-13.10-1.el9_1.x86_64
+postgresql-server-13.10-1.el9_1.x86_64
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# grep -in postgres  /etc/passwd
+23:postgres:x:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
+[root@ip-172-31-26-24 ~]# 
+
+```
+
+
 
 
 
