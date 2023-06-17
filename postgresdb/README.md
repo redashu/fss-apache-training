@@ -867,4 +867,44 @@ hellojack=> \q
 
 ```
 
+### Installing pgadmin in RHEL 9 to manage postgresql server
+
+## Installing rpm 
+
+```
+ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+  sudo dnf install -y https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-redhat-repo-2-1.noarch.rpm
+
+     sudo dnf makecache
+ 
+    sudo dnf install pgadmin4 -y
+
+```
+
+### running shell script
+
+```
+[root@ip-172-31-30-55 bin]# pwd
+/usr/pgadmin4/bin
+[root@ip-172-31-30-55 bin]# ./setup-web.sh 
+Setting up pgAdmin 4 in web mode on a Redhat based platform...
+Creating configuration database...
+NOTE: Configuring authentication for SERVER mode.
+
+Enter the email address and password to use for the initial pgAdmin user account:
+
+Email address: ashutoshh@delvex.io
+Password: 
+Retype password:
+pgAdmin 4 - Application Initialisation
+======================================
+
+Creating storage and log directories...
+Configuring SELinux...
+The Apache web server is running and must be restarted for the pgAdmin 4 installation to complete. Continue (y/n)? y
+Apache successfully restarted. You can now start using pgAdmin 4 in web mode at http://127.0.0.1/pgadmin4
+[root@ip-172-31-30-55 bin]# 
+
+```
+
 
