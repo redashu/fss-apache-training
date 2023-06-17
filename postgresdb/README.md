@@ -574,6 +574,10 @@ ashudb=# \q
 
 ```
 
+## Task 2 
+
+<img src="t2.png">
+
 
 
 
