@@ -757,4 +757,29 @@ postgres=> \l
 postgres=> \q
 
 ```
+### alter native way to create database for particular user from admin
+
+```
+[postgres@ip-172-31-30-55 ~]$ create
+create-cracklib-dict  createdb              createuser            
+[postgres@ip-172-31-30-55 ~]$ createdb -O jack  newdbjack 
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ 
+[postgres@ip-172-31-30-55 ~]$ exit
+logout
+[root@ip-172-31-30-55 ~]# su - jack 
+Last login: Sat Jun 17 09:54:33 UTC 2023 on pts/0
+[jack@ip-172-31-30-55 ~]$ 
+[jack@ip-172-31-30-55 ~]$ psql 
+psql: error: FATAL:  database "jack" does not exist
+[jack@ip-172-31-30-55 ~]$ 
+[jack@ip-172-31-30-55 ~]$ psql -d newdbjack
+psql (13.10)
+Type "help" for help.
+
+newdbjack=> 
+
+```
+
+
 
