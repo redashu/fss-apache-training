@@ -349,7 +349,94 @@ postgres=#
 ```
 
 
+## SQL query of postgres
+
+### taking help
+
+```
+[postgres@ip-172-31-26-24 ~]$ psql 
+psql (13.10)
+Type "help" for help.
+
+postgres=# 
+postgres=# 
+postgres=# \h
+Available help:
+  ABORT                            CHECKPOINT                       CREATE USER                      DROP TRIGGER
+  ALTER AGGREGATE                  CLOSE                            CREATE USER MAPPING              DROP TYPE
+  ALTER COLLATION                  CLUSTER                          CREATE VIEW                      DROP USER
+  ALTER CONVERSION                 COMMENT                          DEALLOCATE                       DROP USER MAPPING
+  ALTER DATABASE                   COMMIT                           DECLARE                          DROP VIEW
+  ALTER DEFAULT PRIVILEGES         COMMIT PREPARED                  DELETE                           END
+  ALTER DOMAIN                     COPY                             DISCARD                          EXECUTE
+
+```
+
+### listing databases 
+
+```
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)
+
+postgres=# 
+postgres=# \list
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             | 
+```
+
+### creating database
+
+```
+ostgres=# CREATE DATABASE ashudb;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ ashudb    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+
+```
+
+### switch to database you create
+
+```
+postgres=# \c ashudb
+You are now connected to database "ashudb" as user "postgres".
+ashudb=# 
+ashudb=# 
+
+```
+
+### checking table (relation) in the database
+
+```
+ashudb=# \dt
+Did not find any relations.
+ashudb=# 
+ashudb=# 
 
 
+```
+
+## Creating table im postgresql 
+
+```
+
+```
 
 
