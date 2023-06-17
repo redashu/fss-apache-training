@@ -780,6 +780,91 @@ Type "help" for help.
 newdbjack=> 
 
 ```
+## data transfer using Rsync 
 
+<img src="rsync.png">
+
+### from vm 1 to vm2 using rsync
+
+```
+postgres@ip-172-31-26-24 ~]$ ls
+alldb.sql  ashudb_backup.sql  backups  data  initdb_postgresql.log  jack@3.141.13.39
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ rsync -avp  ashudb_backup.sql   jack@3.141.13.39:/home/jack/
+jack@3.141.13.39's password: 
+sending incremental file list
+ashudb_backup.sql
+
+sent 2,049 bytes  received 35 bytes  833.60 bytes/sec
+total size is 1,927  speedup is 0.92
+
+```
+
+### restoring backup 
+
+```
+[jack@ip-172-31-30-55 ~]$ psql -d hellojack
+psql (13.10)
+Type "help" for help.
+
+hellojack=> \d
+Did not find any relations.
+hellojack=> 
+\q
+[jack@ip-172-31-30-55 ~]$ ls
+ashudb_backup.sql
+[jack@ip-172-31-30-55 ~]$ psql hellojack < ashudb_backup.sql 
+SET
+SET
+SET
+SET
+SET
+ set_config 
+------------
+ 
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE TABLE
+ERROR:  must be member of role "postgres"
+CREATE SEQUENCE
+ERROR:  must be member of role "postgres"
+ALTER SEQUENCE
+ALTER TABLE
+COPY 2
+ setval 
+--------
+      2
+(1 row)
+
+ALTER TABLE
+[jack@ip-172-31-30-55 ~]$ psql -d hellojack
+psql (13.10)
+Type "help" for help.
+
+hellojack=> \d
+           List of relations
+ Schema |    Name    |   Type   | Owner 
+--------+------------+----------+-------
+ public | emp        | table    | jack
+ public | emp_id_seq | sequence | jack
+(2 rows)
+
+hellojack=> select * from emp;
+ id |         name         |        email        | remarks 
+----+----------------------+---------------------+---------
+  1 | ashu                 | ashutoshh@linux.com | 
+  2 | tr                   | tr@google.com       | 
+(2 rows)
+
+hellojack=> \q
+
+```
 
 
