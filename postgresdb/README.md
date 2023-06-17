@@ -275,6 +275,80 @@ Jun 17 06:50:00 ip-172-31-26-24.us-east-2.compute.internal systemd[1]: Started P
 [root@ip-172-31-26-24 data]# systemctl enable  postgresql.service 
 ```
 
+## Connecting to postgresql -- postmaster daemon from client software
+
+### creating password for system user postgres
+```
+root@ip-172-31-26-24 ~]# grep -in postgres  /etc/passwd
+23:postgres:x:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# grep -in postgres  /etc/shadow
+23:postgres:!!:19525::::::
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# passwd postgres 
+Changing password for user postgres.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# 
+logout
+[ec2-user@ip-172-31-26-24 ~]$ 
+[ec2-user@ip-172-31-26-24 ~]$ su  - postgres 
+Password: 
+[postgres@ip-172-31-26-24 ~]$ id
+uid=26(postgres) gid=26(postgres) groups=26(postgres) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[postgres@ip-172-31-26-24 ~]$ 
+
+
+
+```
+
+### PSQL is using RBAC which need to match system user with database user by default
+
+```
+[root@ip-172-31-26-24 ~]# id
+uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[root@ip-172-31-26-24 ~]# whoami
+root
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# psql
+psql: error: FATAL:  role "root" does not exist
+[root@ip-172-31-26-24 ~]# 
+[root@ip-172-31-26-24 ~]# su - ec2-user
+Last login: Sat Jun 17 06:31:42 UTC 2023 from 103.59.75.217 on pts/0
+[ec2-user@ip-172-31-26-24 ~]$ 
+[ec2-user@ip-172-31-26-24 ~]$ 
+[ec2-user@ip-172-31-26-24 ~]$ whoami
+ec2-user
+[ec2-user@ip-172-31-26-24 ~]$ psql 
+psql: error: FATAL:  role "ec2-user" does not exist
+[ec2-user@ip-172-31-26-24 ~]$ exit
+logout
+[root@ip-172-31-26-24 ~]# su - ec2-user
+Last login: Sat Jun 17 07:01:41 UTC 2023 on pts/0
+[ec2-user@ip-172-31-26-24 ~]$ 
+[ec2-user@ip-172-31-26-24 ~]$ exit
+logout
+[root@ip-172-31-26-24 ~]# su - postgres 
+Last login: Sat Jun 17 06:57:30 UTC 2023 on pts/0
+[postgres@ip-172-31-26-24 ~]$ 
+[postgres@ip-172-31-26-24 ~]$ whoami
+postgres
+[postgres@ip-172-31-26-24 ~]$ psql 
+psql (13.10)
+Type "help" for help.
+
+postgres=# 
+postgres=# 
+
+```
+
+
 
 
 
