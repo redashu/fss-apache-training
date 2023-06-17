@@ -245,6 +245,36 @@ log     pg_hba.conf   pg_multixact   pg_serial    pg_stat_tmp   pg_twophase  pg_
 
 ```
 
+### starting and enable service
+
+```
+[root@ip-172-31-26-24 data]# systemctl start postgresql.service 
+[root@ip-172-31-26-24 data]# systemctl status  postgresql.service 
+● postgresql.service - PostgreSQL database server
+     Loaded: loaded (/usr/lib/systemd/system/postgresql.service; disabled; preset: disabled)
+     Active: active (running) since Sat 2023-06-17 06:50:00 UTC; 6s ago
+    Process: 14604 ExecStartPre=/usr/libexec/postgresql-check-db-dir postgresql (code=exited, status=0/SUCCESS)
+   Main PID: 14606 (postmaster)
+      Tasks: 8 (limit: 10863)
+     Memory: 16.5M
+        CPU: 48ms
+     CGroup: /system.slice/postgresql.service
+             ├─14606 /usr/bin/postmaster -D /var/lib/pgsql/data
+             ├─14607 "postgres: logger "
+             ├─14609 "postgres: checkpointer "
+             ├─14610 "postgres: background writer "
+             ├─14611 "postgres: walwriter "
+             ├─14612 "postgres: autovacuum launcher "
+             ├─14613 "postgres: stats collector "
+             └─14614 "postgres: logical replication launcher "
+
+Jun 17 06:50:00 ip-172-31-26-24.us-east-2.compute.internal systemd[1]: Starting PostgreSQL database server...
+Jun 17 06:50:00 ip-172-31-26-24.us-east-2.compute.internal postmaster[14606]: 2023-06-17 06:50:00.400 UTC [14606] LOG:  redirecting log output to logging co>
+Jun 17 06:50:00 ip-172-31-26-24.us-east-2.compute.internal postmaster[14606]: 2023-06-17 06:50:00.400 UTC [14606] HINT:  Future log output will appear in di>
+Jun 17 06:50:00 ip-172-31-26-24.us-east-2.compute.internal systemd[1]: Started PostgreSQL database server.
+[root@ip-172-31-26-24 data]# systemctl enable  postgresql.service 
+```
+
 
 
 
