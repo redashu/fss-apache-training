@@ -203,6 +203,48 @@ postgresql-server-13.10-1.el9_1.x86_64
 
 ```
 
+## Postgresql with user relation 
+
+<img src="user.png">
+
+### initialize database by default profile
+
+```
+[root@ip-172-31-26-24 ~]# postgresql-setup   --initdb 
+ * Initializing database in '/var/lib/pgsql/data'
+ * Initialized, logs are in /var/lib/pgsql/initdb_postgresql.log
+```
+
+
+### checking more details
+
+```
+[root@ip-172-31-26-24 ~]# cd /var/lib/pgsql/
+[root@ip-172-31-26-24 pgsql]# ls
+backups  data  initdb_postgresql.log
+[root@ip-172-31-26-24 pgsql]# tail -f initdb_postgresql.log 
+selecting default time zone ... UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+Success. You can now start the database server using:
+
+    /usr/bin/pg_ctl -D /var/lib/pgsql/data -l logfile start
+
+^C
+[root@ip-172-31-26-24 pgsql]# ls
+backups  data  initdb_postgresql.log
+[root@ip-172-31-26-24 pgsql]# cd  data/
+[root@ip-172-31-26-24 data]# ls
+base    pg_commit_ts  pg_ident.conf  pg_notify    pg_snapshots  pg_subtrans  PG_VERSION  postgresql.auto.conf
+global  pg_dynshmem   pg_logical     pg_replslot  pg_stat       pg_tblspc    pg_wal      postgresql.conf
+log     pg_hba.conf   pg_multixact   pg_serial    pg_stat_tmp   pg_twophase  pg_xact
+[root@ip-172-31-26-24 data]# 
+
+```
+
 
 
 
